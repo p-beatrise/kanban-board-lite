@@ -1,0 +1,23 @@
+{
+  "name": "kanban-app",
+  "version": "1.0.0",
+  "description": "Kanban-style todo app built with Vue 3, Pinia and Vite",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "type-check": "vue-tsc -b"
+  },
+  "dependencies": {
+    "pinia": "^2.2.6",
+    "vue": "^3.5.13",
+    "vue-i18n": "^11.4.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "^6.0.3",
+    "vite": "^6.0.5",
+    "vue-tsc": "^3.3.5"
+  }
+}
