@@ -28,7 +28,7 @@ function confirmDelete(): void {
 // --------------------------- Emits -------------------------------
 
 const emit = defineEmits<{
-  edit: [task: Task]
+  edit: [id: string]
   delete: [id: string]
   dragstart: [event: DragEvent, task: Task]
 }>();
@@ -41,9 +41,9 @@ const emit = defineEmits<{
     tabindex="0"
     role="button"
     @dragstart="emit('dragstart', $event, task)"
-    @click="emit('edit', task)"
-    @keydown.enter.self="emit('edit', task)"
-    @keydown.space.self.prevent="emit('edit', task)"
+    @click="emit('edit', task.id)"
+    @keydown.enter.self="emit('edit', task.id)"
+    @keydown.space.self.prevent="emit('edit', task.id)"
   >
     <!-- Task title -->
     <header class="task-card-header">

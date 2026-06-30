@@ -51,6 +51,7 @@ export default {
   },
   error: {
     update: 'Neizdevās saglabāt izmaiņas!',
+    taskNotFound: 'Uzdevums netika atrasts!',
   },
   notify: {
     taskCreated: 'Uzdevums sekmīgi izveidots!',

@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useTasksStore, type Task } from './stores/tasks';
+import { useNotifyStore } from './stores/notifications';
 import { STATUS } from './constants/statusTypes.ts';
+import { NOTIFICATION } from './constants/notificationTypes';
 import { deepCopy } from './utils/copyUtils';
 import Notification from './components/Notification.vue';
 import FilterBar from './components/FilterBar.vue';
@@ -11,6 +13,7 @@ import TaskModal from './components/TaskModal.vue';
 
 const { t } = useI18n();
 const store = useTasksStore();
+const notifyStore = useNotifyStore();
 
 // ------------------ Reactive state ----------------------
 
@@ -36,8 +39,18 @@ function createDraftTask(): Task {
 /**
  * Opens task modal and creates empty task or a deep copy of an existing task for editing
  */
-function openModal(task?: Task): void {
-  editingTask.value = task?.id ? deepCopy(task) : createDraftTask();
+function openModal(id?: string): void {
+  if (id) {
+    const task = store.tasks.find((t) => t.id === id);
+    if (!task) {
+      notifyStore.notify(t('error.taskNotFound'), NOTIFICATION.ERROR);
+      console.error(`Task not found: ${id}`);
+      return;
+    }
+    editingTask.value = deepCopy(task);
+  } else {
+    editingTask.value = createDraftTask();
+  }
   isModalOpen.value = true;
 }
 

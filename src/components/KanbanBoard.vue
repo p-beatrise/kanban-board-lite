@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useTasksStore, type Task } from '../stores/tasks';
+import { useTasksStore } from '../stores/tasks';
 import { STATUS_TYPES } from '../constants/statusTypes.ts';
 import KanbanColumn from './KanbanColumn.vue';
 
@@ -17,7 +17,7 @@ const columns = computed(() =>
 // --------------------------- Emits -------------------------------
 
 const emit = defineEmits<{
-  edit: [task: Task]
+  edit: [id: string]
 }>();
 </script>
 

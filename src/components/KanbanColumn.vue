@@ -66,7 +66,7 @@ function handleDelete(taskId: string): void {
 // --------------------------- Emits -------------------------------
 
 const emit = defineEmits<{
-  edit: [task: Task]
+  edit: [id: string]
 }>();
 
 </script>
