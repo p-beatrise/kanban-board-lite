@@ -19,16 +19,16 @@ src/
 App.vue
 ├── FilterBar.vue
 ├── KanbanBoard.vue
-│   └── KanbanColumn.vue (x statusu skaits)
-│       └── TaskCard.vue  (×n)
-│           └── ConfirmModal.vue
-├── TaskModal.vue
+│   ├── KanbanColumn.vue (x statusu skaits)
+│   │   └── TaskCard.vue  (×n)
+│   │       └── ConfirmModal.vue
+│   └── TaskModal.vue
 └── Notification.vue
 ```
 
 ## Apraksts
 
-`App` apstrādā uzdevumu izmaiņu saglabāšanu/izveidi, izmantojot store, kā arī uzdevuma modālā loga(`TaskModal`) atvēršanu. `App` ar `TaskModal` ir two-way bind uzdevuma datiem(ar `editingTask` mainīgo). Tas ļauj datu saglabāšanu veikt caur `App`, jo caur to tiek noteikta arī modālā loga atvērtība.
+`KanbanBoard` apstrādā uzdevumu izmaiņu saglabāšanu/izveidi, izmantojot store, kā arī uzdevuma modālā loga(`TaskModal`) atvēršanu. `KanbanBoard` ar `TaskModal` ir two-way bind uzdevuma datiem(ar `editingTask` mainīgo). Tas ļauj datu saglabāšanu veikt caur `KanbanBoard`, jo caur to tiek noteikta arī modālā loga atvērtība. `App` satur tikai komponentes, lai saglabāšana/dzēšana/labošana uzdevumiem būtu vismaz `KanbanBoard` līmenī, un `App` kalpotu tikai kā satvars galvenajām komponentēm.
 
 `KanbanBoard` ir definēts kā atsevišķa komponente, nevis apvienots ar `KanbanColumn`, lai katra kolonna būtu kā atsevišķa komponente un nedalītu mainīgo(`isDragOver`), kas nosaka, virs kuras kolonnas ir pārvietots uzdevums.
 

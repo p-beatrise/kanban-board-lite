@@ -156,6 +156,12 @@ button {
   gap: 1rem;
 }
 
+.board-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 @media (max-width: 720px) {
   .board {
     grid-template-columns: 1fr;
