@@ -26,6 +26,9 @@ const editingTask = ref<Task>(createDraftTask());
 
 // --------------------------- Functions -------------------------------
 
+/**
+ * Builds an empty task to display when opening task addition modal
+ */
 function createDraftTask(): Task {
   return {
     id: '',
@@ -37,6 +40,9 @@ function createDraftTask(): Task {
   };
 }
 
+/**
+ * Opens task modal and creates empty task or a deep copy of an existing task for editing
+ */
 function openModal(id?: string): void {
   if (id) {
     const task = store.tasks.find((t) => t.id === id);
@@ -56,6 +62,9 @@ function closeModal(): void {
   isModalOpen.value = false;
 }
 
+/**
+ * Handles save by passing a new or existing task to store for saving
+ */
 function handleSave(): void {
   const task = editingTask.value;
   if (task.id) {
