@@ -77,8 +77,8 @@ function handleSave(): void {
 </script>
 
 <template>
-  <div class="board-wrapper">
-    <button class="btn btn-primary add-task-btn" type="button" @click="openModal()">
+  <div class="board">
+    <button class="btn btn--primary board__add-task" type="button" @click="openModal()">
       {{ t('common.add') }}
       <!-- Plus icon -->
       <svg
@@ -96,7 +96,7 @@ function handleSave(): void {
         <path d="M8 12h8" />
       </svg>
     </button>
-    <div class="board">
+    <div class="board__grid">
       <KanbanColumn
         v-for="column in columns"
         :key="column.status"

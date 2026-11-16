@@ -5,12 +5,12 @@ const notifyStore = useNotifyStore();
 </script>
 
 <template>
-  <div class="notification-stack">
+  <div class="notifications">
     <div
       v-for="notification in notifyStore.notifications"
       :key="notification.id"
-      class="notification"
-      :class="`notification-${notification.type}`"
+      class="notifications__item"
+      :class="`notifications__item--${notification.type}`"
       role="alert"
     >
       {{ notification.message }}

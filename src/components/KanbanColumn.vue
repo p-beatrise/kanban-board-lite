@@ -74,16 +74,16 @@ const emit = defineEmits<{
 <template>
   <section
     class="column"
-    :class="{ 'column-hover ': isDragOver }"
+    :class="{ 'column--hover': isDragOver }"
     @dragover="onDragOver"
     @dragleave="isDragOver = false"
     @drop="onDrop"
   >
-    <header class="column-header">
-      <h2 :class="`column-title-${status}`">{{ title }}</h2>
-      <span class="column-count">{{ tasks.length }}</span>
+    <header class="column__header">
+      <h2 class="column__title" :class="`column__title--${status}`">{{ title }}</h2>
+      <span class="column__count">{{ tasks.length }}</span>
     </header>
-    <div class="column-list">
+    <div class="column__list">
       <TaskCard
         v-for="task in tasks"
         :key="task.id"
@@ -92,7 +92,7 @@ const emit = defineEmits<{
         @delete="handleDelete"
         @dragstart="onDragStart"
       />
-      <p v-if="tasks.length === 0" class="column-empty">{{ t('kanbanColumn.noTasks') }}</p>
+      <p v-if="tasks.length === 0" class="column__empty">{{ t('kanbanColumn.noTasks') }}</p>
     </div>
   </section>
 </template>

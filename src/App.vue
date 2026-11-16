@@ -9,8 +9,8 @@ const { t } = useI18n();
 
 <template>
   <div class="app">
-    <header class="app-header">
-      <h1>{{ t('app.title') }}</h1>
+    <header class="app__header">
+      <h1 class="app__title">{{ t('app.title') }}</h1>
     </header>
     <FilterBar />
     <KanbanBoard />

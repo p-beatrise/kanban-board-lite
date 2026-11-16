@@ -101,26 +101,27 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div v-if="open" class="modal-overlay" @click.self="handleClose()">
+  <div v-if="open" class="modal__overlay" @click.self="handleClose()">
     <div class="modal" role="dialog" aria-modal="true">
-      <header class="modal-header">
+      <header class="modal__header">
         <h2>{{ task.id ? t('taskModal.editTitle') : t('taskModal.newTitle') }}</h2>
-        <button class="modal-close" type="button" :title="t('common.close')" @click="handleClose()">&times;</button>
+        <button class="modal__close" type="button" :title="t('common.close')" @click="handleClose()">&times;</button>
       </header>
 
       <!-- Title -->
-      <form class="modal-form" novalidate @submit.prevent="handleSubmit">
+      <form class="modal__form" novalidate @submit.prevent="handleSubmit">
         <label class="field">
           <span>{{ t('taskModal.titleLabel') }}</span>
           <input
             ref="titleInput"
             v-model="task.title"
             type="text"
+            class="field__control"
             :maxlength="TITLE_MAX_LENGTH"
             :placeholder="t('taskModal.titlePlaceholder')"
-            :class="{ 'field-invalid': validationErrors.title }"
+            :class="{ 'field__control--invalid': validationErrors.title }"
           />
-          <span v-if="validationErrors.title" class="field-error">{{ validationErrors.title }}</span>
+          <span v-if="validationErrors.title" class="field__error">{{ validationErrors.title }}</span>
         </label>
         <!-- Description -->
         <label class="field">
@@ -128,31 +129,32 @@ const emit = defineEmits<{
           <textarea
             v-model="task.description"
             rows="4"
+            class="field__control"
             :maxlength="DESCRIPTION_MAX_LENGTH"
             :placeholder="t('taskModal.descriptionPlaceholder')"
-            :class="{ 'field-invalid': validationErrors.description }"
+            :class="{ 'field__control--invalid': validationErrors.description }"
           ></textarea>
-          <span class="field-counter">{{ task.description.length }} / {{ DESCRIPTION_MAX_LENGTH }}</span>
-          <span v-if="validationErrors.description" class="field-error">{{ validationErrors.description }}</span>
+          <span class="field__counter">{{ task.description.length }} / {{ DESCRIPTION_MAX_LENGTH }}</span>
+          <span v-if="validationErrors.description" class="field__error">{{ validationErrors.description }}</span>
         </label>
         <!-- Status -->
         <label class="field">
           <span>{{ t('taskModal.statusLabel') }}</span>
-          <select v-model="task.status" @keydown.enter.prevent="openDropdown">
+          <select v-model="task.status" class="field__control" @keydown.enter.prevent="openDropdown">
             <option v-for="status in STATUS_TYPES" :key="status" :value="status">
               {{ t(`status.${status}`) }}
             </option>
           </select>
         </label>
         <!-- Time values -->
-        <p v-if="task.id" class="modal-meta-data">
+        <p v-if="task.id" class="modal__meta-data">
           <span>{{ t('taskModal.created') }}: {{ formatDateTime(task.createdAt) }}</span>
           <span>{{ t('taskModal.updated') }}: {{ formatDateTime(task.updatedAt) }}</span>
           <span>{{ t('taskModal.taskId', { id: task.id }) }}</span>
         </p>
         <!-- Buttons -->
-        <footer class="modal-actions">
-          <button type="submit" class="btn btn-primary">
+        <footer class="modal__actions">
+          <button type="submit" class="btn btn--primary">
             {{ task.id ? t('common.save') : t('common.add') }}
             <!-- Save icon -->
             <svg
@@ -170,7 +172,7 @@ const emit = defineEmits<{
               <path d="M7 3v5h8" />
             </svg>
           </button>
-          <button type="button" class="btn btn-secondary" @click="handleClose()">
+          <button type="button" class="btn btn--secondary" @click="handleClose()">
             {{ t('common.cancel') }}
             <!-- Cancel icon -->
             <svg

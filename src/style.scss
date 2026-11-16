@@ -1,0 +1,437 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --colour-background: #f1f1f4;
+  --colour-region: #ffffff;
+  --colour-region-2: #f1f1f4;
+  --colour-region-2-hover: #ece9fc;
+  --border: #dee0e3;
+  --colour-blue: #004ab8;
+  --colour-blue-hover: #002e72;
+  --colour-input: #172436;
+  --colour-label: #6e6b82;
+  --colour-new: #036cf5;
+  --colour-ongoing: #c55300;
+  --colour-complete: #198038;
+  --colour-red: #d0141e;
+}
+
+body {
+  background: var(--colour-background);
+  font-family: system-ui, sans-serif, Arial, Helvetica;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+
+  &--primary {
+    background: var(--colour-blue);
+    color: var(--colour-region);
+    border-color: var(--colour-blue);
+
+    &:hover {
+      background: var(--colour-blue-hover);
+    }
+  }
+
+  &--secondary {
+    background: var(--border);
+    color: var(--colour-input);
+    border-color: var(--border);
+
+    &:hover {
+      border-color: var(--colour-blue);
+      color: var(--colour-blue);
+    }
+  }
+
+  &--tertiary {
+    background: transparent;
+    color: var(--colour-blue);
+    border-color: var(--colour-blue);
+
+    &:hover {
+      background: var(--colour-blue);
+      color: var(--colour-region);
+      border-color: var(--colour-blue);
+    }
+  }
+}
+
+/* App */
+.app {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__title {
+    font-size: 1.5rem;
+  }
+}
+
+/* KanbanBoard component */
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__add-task {
+    align-self: flex-end;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+
+    @media (max-width: 720px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* FilterBar component */
+.filter-bar {
+  background: var(--colour-region);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  min-width: 200px;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  &__row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__search,
+  &__status {
+    background: var(--colour-region-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    color: var(--colour-input);
+    font-size: 0.875rem;
+    font-family: inherit;
+    max-width: 100%;
+
+    &:focus {
+      outline: none;
+      border-color: var(--colour-blue);
+    }
+  }
+
+  &__field {
+    min-width: 0;
+
+    &--search {
+      flex: 2;
+    }
+
+    &--status {
+      flex: 1;
+      min-width: 180px;
+    }
+  }
+}
+
+/* KanbanColumn component */
+.column {
+  background: var(--colour-region);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 320px;
+  /* For smooth color transition when task is dragged over column*/
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &--hover {
+    border-color: var(--colour-blue);
+    background: var(--colour-region-2-hover);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+
+    &--todo {
+      color: var(--colour-new);
+    }
+
+    &--in-progress {
+      color: var(--colour-ongoing);
+    }
+
+    &--done {
+      color: var(--colour-complete);
+    }
+  }
+
+  &__count {
+    font-size: 0.75rem;
+    background: var(--border);
+    border-radius: 100px;
+    padding: 0.1rem 0.5rem;
+    color: var(--colour-input);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  &__empty {
+    color: var(--colour-label);
+    font-size: 0.825rem;
+    text-align: center;
+    padding: 1rem 0;
+  }
+}
+
+/* TaskCard component */
+.task-card {
+  background: var(--colour-region-2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.75rem 0.9rem;
+  cursor: grab;
+  transition: border-color 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--colour-blue);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    word-break: break-word;
+  }
+
+  &__delete {
+    background: none;
+    border: none;
+    color: var(--colour-label);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 0.15rem;
+
+    &:hover {
+      color: var(--colour-red);
+    }
+  }
+
+  &__description {
+    font-size: 0.825rem;
+    color: var(--colour-label);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__footer {
+    font-size: 0.825rem;
+    color: var(--colour-label);
+  }
+}
+
+/* TaskModal / ConfirmModal component */
+.modal {
+  background: var(--colour-region);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: min(480px, 90vw);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: var(--colour-label);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      color: var(--colour-input);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  &__text {
+    font-size: 0.875rem;
+    color: var(--colour-input);
+  }
+
+  &__meta-data {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.825rem;
+    color: var(--colour-label);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+  }
+}
+
+/* Form field */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.825rem;
+  color: var(--colour-label);
+
+  &__control {
+    background: var(--colour-region-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.6rem;
+    color: var(--colour-input);
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+
+    &:focus {
+      outline: none;
+      border-color: var(--colour-blue);
+    }
+
+    &--invalid {
+      border-color: var(--colour-red);
+    }
+  }
+
+  &__error {
+    color: var(--colour-red);
+    font-size: 0.75rem;
+  }
+
+  &__counter {
+    color: var(--colour-label);
+    font-size: 0.75rem;
+    text-align: right;
+  }
+}
+
+/* Notification component */
+.notifications {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 200;
+
+  &__item {
+    color: var(--colour-background);
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 320px;
+
+    &--error {
+      background: var(--colour-red);
+    }
+
+    &--success {
+      background: var(--colour-complete);
+    }
+  }
+}

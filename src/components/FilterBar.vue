@@ -43,7 +43,7 @@ function openDropdown(event: KeyboardEvent): void {
 
 <template>
   <div class="filter-bar">
-    <h4 class="filter-bar-heading">
+    <h4 class="filter-bar__heading">
       <!-- Filter icon -->
       <svg
         viewBox="0 0 24 24"
@@ -60,21 +60,21 @@ function openDropdown(event: KeyboardEvent): void {
       {{ t('filterBar.filters') }}
     </h4>
     <!-- Fields -->
-    <div class="filter-bar-row">
-      <label class="field filter-bar-field-search">
+    <div class="filter-bar__row">
+      <label class="field filter-bar__field filter-bar__field--search">
         <span>{{ t('filterBar.searchLabel') }}</span>
         <!-- drop prevent used so task id cannot be dropped in filter-->
         <input
           v-model="inputText"
           type="search"
-          class="filter-bar-search"
+          class="filter-bar__search"
           :placeholder="t('filterBar.searchPlaceholder')"
           @drop.prevent
         />
       </label>
-      <label class="field filter-bar-field-status">
+      <label class="field filter-bar__field filter-bar__field--status">
         <span>{{ t('filterBar.statusLabel') }}</span>
-        <select v-model="inputStatus" class="filter-bar-status" @keydown.enter.prevent="openDropdown">
+        <select v-model="inputStatus" class="filter-bar__status" @keydown.enter.prevent="openDropdown">
           <option value="">{{ t('filterBar.allStatuses') }}</option>
           <option v-for="status in STATUS_TYPES" :key="status" :value="status">
             {{ t(`status.${status}`) }}
@@ -83,8 +83,8 @@ function openDropdown(event: KeyboardEvent): void {
       </label>
     </div>
     <!-- Buttons -->
-    <div class="filter-bar-bottom">
-      <button type="button" class="btn btn-tertiary" @click="search">
+    <div class="filter-bar__bottom">
+      <button type="button" class="btn btn--tertiary" @click="search">
         <!-- Magnifying glass icon-->
         {{ t('filterBar.search') }}
         <svg
@@ -101,7 +101,7 @@ function openDropdown(event: KeyboardEvent): void {
           <path d="M21 21l-4.3-4.3" />
         </svg>
       </button>
-      <button type="button" class="btn btn-tertiary" @click="clear">
+      <button type="button" class="btn btn--tertiary" @click="clear">
         {{ t('filterBar.clear') }}
         <!-- X icon-->
         <svg

@@ -46,10 +46,10 @@ const emit = defineEmits<{
     @keydown.space.self.prevent="emit('edit', task.id)"
   >
     <!-- Task title -->
-    <header class="task-card-header">
-      <h3 class="task-card-title">{{ task.title }}</h3>
+    <header class="task-card__header">
+      <h3 class="task-card__title">{{ task.title }}</h3>
       <button
-        class="task-card-delete"
+        class="task-card__delete"
         type="button"
         :title="t('taskCard.deleteTitle')"
         @click.stop="isConfirmOpen = true"
@@ -74,8 +74,8 @@ const emit = defineEmits<{
       </button>
     </header>
     <!-- Task description -->
-    <p v-if="task.description" class="task-card-description">{{ task.description }}</p>
-    <footer class="task-card-footer">
+    <p v-if="task.description" class="task-card__description">{{ task.description }}</p>
+    <footer class="task-card__footer">
       <span>{{ t('taskCard.updated') }}: {{ formatDateTime(task.updatedAt) }}</span>
     </footer>
   </article>

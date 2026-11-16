@@ -18,17 +18,17 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div v-if="open" class="modal-overlay" @click.self="emit('cancel')">
+  <div v-if="open" class="modal__overlay" @click.self="emit('cancel')">
     <div class="modal" role="dialog" aria-modal="true">
-      <header class="modal-header">
+      <header class="modal__header">
         <h2>{{ title }}</h2>
-        <button class="modal-close" type="button" :title="t('common.close')" @click="emit('cancel')">&times;</button>
+        <button class="modal__close" type="button" :title="t('common.close')" @click="emit('cancel')">&times;</button>
       </header>
-      <p class="modal-text">{{ message }}</p>
-      <p class="modal-text">{{ t('confirmModal.continue') }}</p>
-      <footer class="modal-actions">
-        <button type="button" class="btn btn-primary" @click="emit('confirm')">{{ t('confirmModal.yes') }}</button>
-        <button type="button" class="btn btn-secondary" @click="emit('cancel')">{{ t('confirmModal.no') }}</button>
+      <p class="modal__text">{{ message }}</p>
+      <p class="modal__text">{{ t('confirmModal.continue') }}</p>
+      <footer class="modal__actions">
+        <button type="button" class="btn btn--primary" @click="emit('confirm')">{{ t('confirmModal.yes') }}</button>
+        <button type="button" class="btn btn--secondary" @click="emit('cancel')">{{ t('confirmModal.no') }}</button>
       </footer>
     </div>
   </div>
